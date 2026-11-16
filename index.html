@@ -1,0 +1,232 @@
+<!doctype html>
+<!-- Palmetto Home Services — fictional demo customer site. CRTC AI automation demo. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palmetto Home Services — Mount Pleasant, SC</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{--bg:#fff;--ink:#111;--muted:#555;--green:#1a6b3c;--green2:#2a9d5c;--light:#f0f7f3;--line:#ddd;--red:#c0392b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,sans-serif}
+.demo-bar{background:#1a1200;color:#f5c842;text-align:center;padding:8px;font-size:.82rem;font-weight:700;letter-spacing:.06em}
+.demo-bar a{color:#f5c842}
+header{background:var(--green);color:#fff;padding:0}
+.nav{max-width:1040px;margin:auto;padding:0 20px;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-size:1.3rem;font-weight:900;letter-spacing:-.02em;color:#fff;text-decoration:none}
+.brand span{color:#a8f5c8}
+nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;margin-left:16px}
+.hero{background:linear-gradient(135deg,var(--green) 0%,#0f4a28 100%);color:#fff;padding:64px 20px}
+.hero-wrap{max-width:900px;margin:auto}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:0 0 16px;letter-spacing:-.03em}
+.hero p{font-size:1.15rem;color:rgba(255,255,255,.85);max-width:640px;margin:0 0 28px}
+.phones{display:flex;gap:16px;flex-wrap:wrap}
+.phone-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--green);font-weight:800;padding:12px 22px;border-radius:8px;text-decoration:none;font-size:1rem}
+.phone-btn.alt{background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4)}
+.services{background:var(--light);padding:52px 20px}
+.services-wrap{max-width:1040px;margin:auto}
+h2{font-size:1.8rem;letter-spacing:-.02em;margin:0 0 28px}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.scard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px}
+.scard h3{margin:0 0 6px;color:var(--green);font-size:1rem}
+.scard p{margin:0;color:var(--muted);font-size:.9rem}
+.form-section{padding:52px 20px;max-width:680px;margin:auto}
+.form-section h2{text-align:center}
+.form-section p{text-align:center;color:var(--muted);margin:0 0 28px}
+.form-card{background:var(--light);border:1px solid var(--line);border-radius:12px;padding:28px}
+label{display:block;font-weight:700;font-size:.88rem;margin:12px 0 4px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;font:inherit;background:#fff}
+select{appearance:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 24px;background:var(--green);color:#fff;border:none;border-radius:8px;font:inherit;font-weight:800;cursor:pointer;width:100%;margin-top:16px;font-size:1.05rem}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+#form-status{margin-top:12px;padding:12px;border-radius:7px;font-size:.9rem;display:none}
+#form-status.ok{background:#d4edda;color:#155724;border:1px solid #c3e6cb;display:block}
+#form-status.err{background:#f8d7da;color:var(--red);border:1px solid #f5c6cb;display:block}
+.trust{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;padding:32px 20px;border-top:1px solid var(--line)}
+.trust-item{text-align:center;font-size:.85rem;color:var(--muted)}
+.trust-item strong{display:block;font-size:1.1rem;color:var(--ink)}
+footer{background:#0f2918;color:rgba(255,255,255,.6);text-align:center;padding:20px;font-size:.82rem}
+@media(max-width:680px){.service-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="demo-bar">⚡ CRTC AI AUTOMATION DEMO — Fictional test customer — <a href="/palmetto-demo/dashboard/">View owner dashboard →</a></div>
+<header>
+  <div class="nav">
+    <a class="brand" href="#">Palmetto <span>Home</span> Services</a>
+    <nav><a href="#services">Services</a><a href="#contact">Get a Quote</a><a href="tel:8435551234">(843) 555-1234</a></nav>
+  </div>
+</header>
+<div class="hero">
+  <div class="hero-wrap">
+    <h1>Local home services you can count on.</h1>
+    <p>Plumbing, HVAC, electrical, and general repairs for homeowners in Mount Pleasant and East Cooper. Licensed, insured, same-day service available.</p>
+    <div class="phones">
+      <a class="phone-btn" href="#contact">Get a Free Quote</a>
+      <a class="phone-btn alt" href="tel:8435551234">Call (843) 555-1234</a>
+    </div>
+  </div>
+</div>
+<section class="services" id="services">
+  <div class="services-wrap">
+    <h2>What we do</h2>
+    <div class="service-grid">
+      <div class="scard"><h3>Plumbing</h3><p>Leaks, water heaters, drain cleaning, fixture installs, pipe repair. Same-day emergency service.</p></div>
+      <div class="scard"><h3>HVAC</h3><p>AC tune-ups, heating repair, full system installs. We service all major brands.</p></div>
+      <div class="scard"><h3>Electrical</h3><p>Outlet installs, panel upgrades, ceiling fans, troubleshooting. Licensed electricians.</p></div>
+      <div class="scard"><h3>General Repairs</h3><p>Doors, windows, drywall, caulking, carpentry. We handle the punch list jobs.</p></div>
+      <div class="scard"><h3>Appliance Install</h3><p>Dishwashers, ranges, washers, dryers. Haul-away available.</p></div>
+      <div class="scard"><h3>Preventive Maintenance</h3><p>Annual HVAC tune-ups, water heater flushes, drain treatments. Keep it running.</p></div>
+    </div>
+  </div>
+</section>
+<section class="form-section" id="contact">
+  <h2>Get a free estimate</h2>
+  <p>Tell us what you need. We'll respond within the hour during business hours.</p>
+  <div class="form-card">
+    <form id="inquiry-form" novalidate>
+      <label for="f-name">Your name *</label>
+      <input id="f-name" name="name" autocomplete="name" required placeholder="Jane Smith">
+      <label for="f-phone">Phone number *</label>
+      <input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="(843) 555-0100">
+      <label for="f-email">Email (optional)</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" placeholder="jane@example.com">
+      <label for="f-service">Service needed *</label>
+      <select id="f-service" name="service" required>
+        <option value="">— Select —</option>
+        <option>Plumbing</option>
+        <option>HVAC</option>
+        <option>Electrical</option>
+        <option>General Repairs</option>
+        <option>Appliance Install</option>
+        <option>Preventive Maintenance</option>
+        <option>Emergency / Not sure</option>
+      </select>
+      <label for="f-urgency">How soon do you need service?</label>
+      <select id="f-urgency" name="urgency">
+        <option value="routine">Routine — within a week is fine</option>
+        <option value="soon">Soon — within 2–3 days</option>
+        <option value="urgent">Urgent — today or tomorrow</option>
+        <option value="emergency">Emergency — right now</option>
+      </select>
+      <label for="f-desc">Describe the problem *</label>
+      <textarea id="f-desc" name="description" rows="4" required placeholder="e.g. Kitchen sink is draining very slowly and backing up…"></textarea>
+      <label for="f-address">Service address (optional)</label>
+      <input id="f-address" name="address" placeholder="123 Main St, Mount Pleasant">
+      <button class="btn" id="submit-btn" type="submit">Send Inquiry</button>
+    </form>
+    <div id="form-status"></div>
+  </div>
+</section>
+<div class="trust">
+  <div class="trust-item"><strong>Licensed &amp; Insured</strong>SC Contractor #12345</div>
+  <div class="trust-item"><strong>Same-Day Available</strong>Call before noon</div>
+  <div class="trust-item"><strong>Free Estimates</strong>No trip charge</div>
+  <div class="trust-item"><strong>5★ Google Rating</strong>142 reviews</div>
+</div>
+<footer>© 2026 Palmetto Home Services · Mount Pleasant, SC · (843) 555-1234<br><small>⚡ Fictional demo business — created by <a href="https://crtcai.com" style="color:#a8f5c8">CRTC AI</a> to demonstrate workflow automation</small></footer>
+
+<script>
+// Shared lead storage key
+var LEAD_KEY = "palmetto_leads";
+
+function getLeads() {
+  try { return JSON.parse(localStorage.getItem(LEAD_KEY) || "[]"); } catch { return []; }
+}
+
+function saveLeads(arr) {
+  localStorage.setItem(LEAD_KEY, JSON.stringify(arr));
+}
+
+function classifyInquiry(service, urgency, desc) {
+  var cat = service || "General";
+  var urg = urgency || "routine";
+  var score = 50;
+  if (urg === "emergency") score = 95;
+  else if (urg === "urgent") score = 80;
+  else if (urg === "soon") score = 65;
+
+  var keywords = desc.toLowerCase();
+  if (/leak|flood|water damage|burst|no heat|no ac|no power|sparking|smoke/.test(keywords)) {
+    score = Math.max(score, 90);
+    urg = "emergency";
+  }
+
+  var responses = {
+    "Plumbing": "Thanks for reaching out! We handle plumbing in Mount Pleasant and East Cooper. Someone will call you within the hour to get more details and schedule a time.",
+    "HVAC": "Got it — HVAC issues are our specialty. We'll call you shortly to diagnose over the phone and get a tech scheduled.",
+    "Electrical": "Electrical work noted. A licensed electrician will call you back within the hour to get details and set up a visit.",
+    "General Repairs": "Thanks! General repair requests usually get a same-week visit. We'll call you to confirm the details.",
+    "Appliance Install": "Appliance installs are quick jobs for us. We'll call to confirm the appliance type and schedule a time.",
+    "Preventive Maintenance": "Smart move — preventive maintenance saves money long-term. We'll call to schedule a convenient time.",
+    "Emergency / Not sure": "We're on it. Someone will call you back within 15 minutes for urgent requests.",
+    "default": "Thanks for reaching out to Palmetto Home Services! We'll call you back shortly to get the details and schedule a visit."
+  };
+
+  return {
+    category: cat,
+    urgency: urg,
+    score: score,
+    urgent: urg === "emergency" || urg === "urgent",
+    autoResponse: responses[cat] || responses["default"]
+  };
+}
+
+document.getElementById("inquiry-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  var f = e.target;
+  var name = f.name.value.trim();
+  var phone = f.phone.value.trim();
+  var service = f.service.value;
+  var urgency = f.urgency.value;
+  var desc = f.description.value.trim();
+
+  if (!name || !phone || !service || !desc) {
+    var st = document.getElementById("form-status");
+    st.className = "err";
+    st.textContent = "Please fill in your name, phone, service type, and description.";
+    return;
+  }
+
+  var btn = document.getElementById("submit-btn");
+  btn.disabled = true;
+  btn.textContent = "Submitting…";
+
+  setTimeout(function() {
+    var classification = classifyInquiry(service, urgency, desc);
+    var lead = {
+      id: "LEAD-" + Date.now(),
+      at: new Date().toISOString(),
+      name: name,
+      phone: phone,
+      email: f.email.value.trim(),
+      service: service,
+      urgency: urgency,
+      description: desc,
+      address: f.address.value.trim(),
+      status: "NEW",
+      classification: classification,
+      autoResponseSent: true,
+      ownerNotified: true
+    };
+
+    var leads = getLeads();
+    // Dedup: same phone + same description = same lead
+    var dup = leads.find(function(l){ return l.phone === phone && l.description === desc; });
+    if (!dup) {
+      leads.unshift(lead);
+      saveLeads(leads);
+    }
+
+    var st = document.getElementById("form-status");
+    st.className = "ok";
+    st.innerHTML = "<strong>✓ Request received!</strong> We'll call you at " + phone + " shortly." +
+      (classification.urgent ? " <strong>Flagged URGENT</strong> — owner notified immediately." : "");
+    f.reset();
+    btn.disabled = false;
+    btn.textContent = "Send Inquiry";
+  }, 900);
+});
+</script>
+</body>
+</html>

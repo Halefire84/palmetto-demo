@@ -1,0 +1,316 @@
+<!doctype html>
+<!-- Palmetto Home Services — owner dashboard. CRTC AI automation demo. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palmetto — Owner Dashboard (DEMO)</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{color-scheme:dark;--bg:#050d17;--panel:#0d1f33;--p2:#112a41;--ink:#f3f6fa;--muted:#aebdca;--lime:#00e676;--gold:#f5c842;--red:#ff4f4f;--blue:#4fa3ff;--line:#26425a;--max:1200px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,sans-serif}
+.demo-bar{background:#1a1200;color:var(--gold);text-align:center;padding:7px;font-size:.78rem;font-weight:700;letter-spacing:.05em}
+.demo-bar a{color:var(--gold)}
+header{background:#071321;border-bottom:1px solid var(--line);padding:0}
+.nav{max-width:var(--max);margin:auto;padding:0 20px;min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:900;font-size:1.05rem;letter-spacing:.05em;color:var(--ink)}
+.brand span{color:var(--lime)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.notif-btn{position:relative;background:none;border:1px solid var(--line);border-radius:6px;color:var(--ink);padding:5px 12px;cursor:pointer;font-size:.82rem}
+.notif-badge{position:absolute;top:-6px;right:-6px;background:var(--red);color:#fff;font-size:.65rem;font-weight:900;border-radius:999px;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 3px}
+.wrap{max-width:var(--max);margin:auto;padding:0 20px}
+.stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:20px 0 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat-val{font-size:2rem;font-weight:900;line-height:1;color:var(--gold)}
+.stat-val.green{color:var(--lime)}.stat-val.red{color:var(--red)}.stat-val.blue{color:var(--blue)}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+.two-col{display:grid;grid-template-columns:1fr 340px;gap:14px;padding:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.card-head{padding:11px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.card-head h3{margin:0;font-size:.88rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.refresh-btn{background:none;border:1px solid var(--line);border-radius:5px;color:var(--muted);padding:3px 10px;cursor:pointer;font-size:.75rem}
+.refresh-btn:hover{color:var(--ink);border-color:var(--muted)}
+/* Lead list */
+.lead-row{padding:11px 16px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
+.lead-row:last-child{border-bottom:none}
+.lead-row:hover{background:var(--p2)}
+.lead-row.selected{background:#0a2535;border-left:3px solid var(--lime)}
+.lr-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.lr-name{font-weight:700;font-size:.9rem}
+.lr-time{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.lr-service{font-size:.78rem;color:var(--muted);margin-top:2px}
+.lr-desc{font-size:.78rem;color:var(--muted);margin-top:3px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:380px}
+.badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:.68rem;font-weight:800;letter-spacing:.05em}
+.badge.new{background:rgba(0,230,118,.15);color:var(--lime);border:1px solid rgba(0,230,118,.3)}
+.badge.contacted{background:rgba(79,163,255,.12);color:var(--blue);border:1px solid rgba(79,163,255,.25)}
+.badge.urgent{background:rgba(255,79,79,.15);color:var(--red);border:1px solid rgba(255,79,79,.3)}
+.badge.booked{background:rgba(245,200,66,.12);color:var(--gold);border:1px solid rgba(245,200,66,.25)}
+.badge.won{background:rgba(0,230,118,.15);color:var(--lime);border:1px solid rgba(0,230,118,.3)}
+.badge.dup{background:rgba(100,100,100,.2);color:#888;border:1px solid #444}
+/* Detail panel */
+.detail-empty{padding:28px;text-align:center;color:var(--muted);font-size:.88rem}
+.detail-body{padding:16px}
+.detail-name{font-size:1.1rem;font-weight:800;margin:0 0 4px}
+.detail-meta{font-size:.8rem;color:var(--muted);margin-bottom:12px}
+.detail-section{margin-top:14px}
+.detail-section h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
+.detail-val{font-size:.88rem;background:var(--p2);border-radius:6px;padding:8px 10px;color:var(--ink)}
+.step-list{list-style:none;margin:0;padding:0}
+.step-list li{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:.82rem}
+.step-list li:last-child{border-bottom:none}
+.step-icon{font-size:.9rem;width:18px;text-align:center;flex-shrink:0}
+.step-name{flex:1;color:var(--muted)}
+.step-status{font-size:.72rem;font-weight:700}
+.step-status.pass{color:var(--lime)}.step-status.fail{color:var(--red)}
+.step-detail{font-size:.72rem;color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Notifications panel */
+.notif-row{padding:10px 14px;border-bottom:1px solid var(--line);font-size:.82rem}
+.notif-row:last-child{border-bottom:none}
+.notif-row.unread{background:rgba(245,200,66,.04)}
+.notif-time{font-size:.7rem;color:var(--muted);display:block;margin-bottom:2px}
+.notif-msg{color:var(--ink)}.notif-msg.urgent{color:var(--red);font-weight:700}
+.empty-msg{padding:20px;text-align:center;color:var(--muted);font-size:.82rem}
+/* Pipeline row */
+.pipeline{display:flex;gap:8px;padding:14px 0;overflow-x:auto}
+.pipe-col{flex:1;min-width:140px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.pipe-head{padding:8px 12px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--line)}
+.pipe-head.new{color:var(--blue)}.pipe-head.contacted{color:var(--muted)}.pipe-head.urgent{color:var(--red)}.pipe-head.booked{color:var(--gold)}.pipe-head.won{color:var(--lime)}.pipe-head.lost{color:#666}
+.pipe-item{padding:8px 12px;border-bottom:1px solid var(--line);font-size:.78rem}
+.pipe-item:last-child{border-bottom:none}
+.pipe-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pipe-svc{color:var(--muted);font-size:.7rem}
+/* Error log */
+.err-row{padding:10px 14px;border-bottom:1px solid var(--line);font-size:.8rem;display:flex;align-items:center;gap:10px}
+.err-row:last-child{border-bottom:none}
+.err-ctx{font-weight:700;color:var(--red);min-width:120px}
+.err-msg{flex:1;color:var(--muted)}
+.err-time{font-size:.7rem;color:var(--muted);white-space:nowrap}
+.resolve-btn{background:none;border:1px solid var(--line);border-radius:4px;color:var(--muted);padding:2px 8px;cursor:pointer;font-size:.7rem}
+/* Full width sections */
+.full-section{padding:0 0 14px}
+/* Demo actions bar */
+.action-bar{background:var(--p2);border:1px solid var(--line);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 0}
+.action-bar span{font-size:.82rem;color:var(--muted)}
+.abt{padding:7px 14px;border-radius:6px;font-size:.82rem;font-weight:700;cursor:pointer;border:1px solid var(--line);color:var(--ink);background:none}
+.abt.primary{background:var(--lime);color:#04140d;border-color:var(--lime)}
+.abt.danger{color:var(--red);border-color:rgba(255,79,79,.3)}
+footer{border-top:1px solid var(--line);padding:14px 0;color:var(--muted);font-size:.75rem;text-align:center}
+@media(max-width:900px){.stat-row{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="demo-bar">⚡ CRTC AI AUTOMATION DEMO — Owner Dashboard — <a href="..">Customer site →</a> · <a href="../demo/">Run test scenarios →</a></div>
+<header>
+  <div class="nav">
+    <div class="brand">CRTC<span>AI</span> · Palmetto Dashboard</div>
+    <div class="nav-right">
+      <button class="notif-btn" id="notif-btn" onclick="toggleNotifs()">🔔 Alerts <span class="notif-badge" id="notif-badge" style="display:none">0</span></button>
+      <button class="abt danger" onclick="clearAll()">Clear demo data</button>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <div class="stat-row" id="stat-row">
+    <div class="stat"><div class="stat-val blue" id="s-new">0</div><div class="stat-label">New leads</div></div>
+    <div class="stat"><div class="stat-val" id="s-total">0</div><div class="stat-label">Total leads</div></div>
+    <div class="stat"><div class="stat-val red" id="s-urgent">0</div><div class="stat-label">Urgent</div></div>
+    <div class="stat"><div class="stat-val gold" id="s-booked">0</div><div class="stat-label">Booked</div></div>
+    <div class="stat"><div class="stat-val green" id="s-won">0</div><div class="stat-label">Won</div></div>
+  </div>
+  <div class="action-bar">
+    <span>Demo actions:</span>
+    <button class="abt primary" onclick="window.location='..#contact'">Submit test inquiry</button>
+    <button class="abt" onclick="window.location='../demo/'">Run 20 scenarios</button>
+    <button class="abt" onclick="refresh()">↻ Refresh</button>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-head"><h3>Incoming leads</h3><button class="refresh-btn" onclick="refresh()">Refresh</button></div>
+        <div id="lead-list"><div class="empty-msg">No leads yet. Submit an inquiry from the <a href=".." style="color:var(--lime)">customer site</a> or <a href="../demo/" style="color:var(--lime)">run test scenarios</a>.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" id="detail-card">
+        <div class="card-head"><h3>Lead detail</h3></div>
+        <div class="detail-empty">Select a lead to view details and workflow trace.</div>
+      </div>
+    </div>
+  </div>
+  <!-- Pipeline -->
+  <div class="full-section">
+    <div class="card-head" style="padding:11px 0 8px"><h3 style="margin:0;font-size:.88rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Pipeline</h3></div>
+    <div class="pipeline" id="pipeline"></div>
+  </div>
+  <!-- Notifications -->
+  <div class="full-section" id="notif-panel" style="display:none">
+    <div class="card">
+      <div class="card-head"><h3>Owner notifications</h3><button class="refresh-btn" onclick="markRead()">Mark all read</button></div>
+      <div id="notif-list"><div class="empty-msg">No notifications.</div></div>
+    </div>
+  </div>
+  <!-- Error log -->
+  <div class="full-section">
+    <div class="card">
+      <div class="card-head"><h3>Error log</h3></div>
+      <div id="error-list"><div class="empty-msg">No errors logged.</div></div>
+    </div>
+  </div>
+</div>
+<footer>Business Autopilot by <a href="https://crtcai.com" style="color:var(--gold)">CRTCai</a> · Palmetto Home Services DEMO · <a href="../demo/" style="color:var(--muted)">Run scenarios →</a></footer>
+
+<script src="../engine.js"></script>
+<script src="../customers/palmetto.js"></script>
+<script>
+var engine = CRTCEngine.create(PALMETTO_CONFIG);
+var selectedId = null;
+
+function fmt(iso) {
+  var d = new Date(iso);
+  var now = new Date();
+  var diff = (now - d) / 1000;
+  if (diff < 60) return "just now";
+  if (diff < 3600) return Math.floor(diff/60) + "m ago";
+  if (diff < 86400) return Math.floor(diff/3600) + "h ago";
+  return d.toLocaleDateString() + " " + d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+}
+
+function statusBadge(lead) {
+  var s = (lead.status || "NEW").toLowerCase();
+  var u = lead.classification && lead.classification.urgent;
+  if (s === "new" && u) return '<span class="badge urgent">URGENT</span>';
+  var map = {new:"new",contacted:"contacted",booked:"booked",won:"won",duplicate:"dup",quoted:"contacted",lost:"dup"};
+  return '<span class="badge '+(map[s]||"new")+'">'+(lead.status||"NEW")+'</span>';
+}
+
+function refresh() {
+  var leads = engine.leads.get();
+  var notes = engine.notifications.get();
+  var errors = engine.errors.get();
+
+  // Stats
+  var counts = {NEW:0,CONTACTED:0,URGENT:0,BOOKED:0,WON:0,total:leads.length};
+  leads.forEach(function(l) {
+    if (l.status==="NEW") counts.NEW++;
+    if (l.classification && l.classification.urgent && l.status !== "WON" && l.status !== "LOST") counts.URGENT++;
+    if (l.status==="BOOKED") counts.BOOKED++;
+    if (l.status==="WON") counts.WON++;
+  });
+  document.getElementById("s-new").textContent = counts.NEW;
+  document.getElementById("s-total").textContent = counts.total;
+  document.getElementById("s-urgent").textContent = counts.URGENT;
+  document.getElementById("s-booked").textContent = counts.BOOKED;
+  document.getElementById("s-won").textContent = counts.WON;
+
+  // Notification badge
+  var unread = notes.filter(function(n){ return !n.read; }).length;
+  var badge = document.getElementById("notif-badge");
+  if (unread > 0) { badge.textContent = unread; badge.style.display = "flex"; }
+  else badge.style.display = "none";
+
+  // Lead list
+  var ll = document.getElementById("lead-list");
+  if (!leads.length) {
+    ll.innerHTML = '<div class="empty-msg">No leads yet. <a href=".." style="color:var(--lime)">Submit a test inquiry</a> or <a href="../demo/" style="color:var(--lime)">run scenarios</a>.</div>';
+  } else {
+    ll.innerHTML = leads.map(function(l) {
+      var sel = l.id === selectedId ? " selected" : "";
+      return '<div class="lead-row'+sel+'" onclick="selectLead(\''+l.id+'\')">' +
+        '<div class="lr-top"><span class="lr-name">'+esc(l.name)+'</span>' +
+        '<span class="lr-time">'+fmt(l.at)+'</span></div>' +
+        '<div class="lr-service">'+esc(l.service)+" — "+statusBadge(l)+'</div>' +
+        '<div class="lr-desc">'+esc(l.description)+'</div>' +
+        '</div>';
+    }).join("");
+  }
+
+  // Pipeline
+  var stages = {NEW:[],CONTACTED:[],URGENT:[],BOOKED:[],WON:[],LOST:[]};
+  leads.forEach(function(l){
+    var key = l.classification && l.classification.urgent && l.status!=="WON" && l.status!=="LOST" ? "URGENT" : l.status;
+    if (!stages[key]) stages["CONTACTED"].push(l); else stages[key].push(l);
+  });
+  var pipe = document.getElementById("pipeline");
+  pipe.innerHTML = Object.keys(stages).map(function(stage){
+    var items = stages[stage];
+    return '<div class="pipe-col"><div class="pipe-head '+stage.toLowerCase()+'">'+stage+' ('+items.length+')</div>'+
+      (items.length ? items.map(function(l){
+        return '<div class="pipe-item"><div class="pipe-name">'+esc(l.name)+'</div><div class="pipe-svc">'+esc(l.service)+'</div></div>';
+      }).join("") : '<div class="pipe-item" style="color:var(--muted)">—</div>') +
+      '</div>';
+  }).join("");
+
+  // Notifications
+  var nl = document.getElementById("notif-list");
+  if (!notes.length) { nl.innerHTML = '<div class="empty-msg">No notifications.</div>'; }
+  else {
+    nl.innerHTML = notes.slice(0,20).map(function(n){
+      return '<div class="notif-row'+(n.read?'':' unread')+'">' +
+        '<span class="notif-time">'+fmt(n.at)+'</span>' +
+        '<span class="notif-msg'+(n.level==="urgent"?" urgent":"")+'">'+esc(n.msg)+'</span></div>';
+    }).join("");
+  }
+
+  // Errors
+  var el = document.getElementById("error-list");
+  var openErrors = errors.filter(function(e){ return !e.resolved; });
+  if (!openErrors.length) { el.innerHTML = '<div class="empty-msg">No errors.</div>'; }
+  else {
+    el.innerHTML = openErrors.map(function(e, i){
+      return '<div class="err-row"><span class="err-ctx">'+esc(e.ctx)+'</span>' +
+        '<span class="err-msg">'+esc(e.msg)+'</span>' +
+        '<span class="err-time">'+fmt(e.at)+'</span>' +
+        '<button class="resolve-btn" onclick="resolveErr('+i+')">Resolve</button></div>';
+    }).join("");
+  }
+
+  // Re-render detail if selected
+  if (selectedId) showDetail(engine.leads.getOne(selectedId));
+}
+
+function selectLead(id) {
+  selectedId = id;
+  showDetail(engine.leads.getOne(id));
+  refresh();
+}
+
+function showDetail(lead) {
+  var panel = document.getElementById("detail-card");
+  if (!lead) { panel.innerHTML = '<div class="card-head"><h3>Lead detail</h3></div><div class="detail-empty">Lead not found.</div>'; return; }
+  var c = lead.classification || {};
+  var steps = (lead.workflowSteps || []);
+  var stepsHtml = steps.length ? '<ul class="step-list">' + steps.map(function(s){
+    return '<li><span class="step-icon">'+(s.status==="PASS"?"✓":"✗")+'</span>' +
+      '<span class="step-name">'+esc(s.step)+'</span>' +
+      '<span class="step-status '+(s.status==="PASS"?"pass":"fail")+'">'+s.status+'</span>' +
+      '<span class="step-detail" title="'+esc(String(s.detail||""))+'">'+esc(String(s.detail||"").slice(0,60))+'</span></li>';
+  }).join("") + '</ul>' : '<div style="color:var(--muted);font-size:.82rem">No workflow trace yet. Run via demo scenarios to see step-by-step evidence.</div>';
+
+  panel.innerHTML = '<div class="card-head"><h3>Lead detail</h3><span style="font-size:.72rem;color:var(--muted)">'+lead.id+'</span></div>' +
+    '<div class="detail-body">' +
+    '<div class="detail-name">'+esc(lead.name)+'</div>' +
+    '<div class="detail-meta">'+esc(lead.phone)+(lead.email?" · "+esc(lead.email):"")+" · "+fmt(lead.at)+'</div>'+
+    statusBadge(lead)+(c.urgent?'<span class="badge urgent" style="margin-left:4px">URGENT</span>':'')+
+    '<div class="detail-section"><h4>Service</h4><div class="detail-val">'+esc(lead.service)+" — "+esc(lead.urgency)+'</div></div>'+
+    '<div class="detail-section"><h4>Description</h4><div class="detail-val">'+esc(lead.description)+'</div></div>'+
+    (lead.autoResponse?'<div class="detail-section"><h4>Auto-response sent</h4><div class="detail-val" style="color:var(--lime)">'+esc(lead.autoResponse)+'</div></div>':'')+
+    '<div class="detail-section"><h4>AI classification</h4><div class="detail-val">Category: '+esc(c.category)+'<br>Urgency: '+esc(c.urgency)+'<br>Score: '+c.score+'</div></div>'+
+    '<div class="detail-section"><h4>Workflow trace</h4>'+stepsHtml+'</div>'+
+    (lead.activity&&lead.activity.length?'<div class="detail-section"><h4>Activity log</h4><ul class="step-list">'+lead.activity.map(function(a){return '<li><span class="step-icon">·</span><span class="step-name">'+esc(a.event)+'</span><span class="step-detail">'+fmt(a.at)+'</span></li>';}).join("")+'</ul></div>':'')+
+    '</div>';
+}
+
+function toggleNotifs() {
+  var p = document.getElementById("notif-panel");
+  p.style.display = p.style.display === "none" ? "block" : "none";
+}
+function markRead() { engine.notifications.markAllRead(); refresh(); }
+function resolveErr(i) { engine.errors.resolve(i); refresh(); }
+function clearAll() { if(confirm("Clear all demo data?")) { engine.leads.clear(); localStorage.removeItem("palmetto_notifications"); localStorage.removeItem("palmetto_errors"); selectedId=null; refresh(); } }
+function esc(s) { return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+refresh();
+setInterval(refresh, 3000);
+</script>
+</body>
+</html>
